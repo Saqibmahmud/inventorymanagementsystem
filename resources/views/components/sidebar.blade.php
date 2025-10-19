@@ -5,7 +5,7 @@
         <a href="{{ url('/profile') }}" class="block hover:bg-gray-700 p-2 rounded">👤 Profile</a>
       <a href="{{url('/brands')}}" class="block hover:bg-gray-700 p-2 rounded">Brands</a>
       <a href="" class="block hover:bg-gray-700 p-2 rounded">Products</a>
-      <a href="" class="block hover:bg-gray-700 p-2 rounded">Products Categories</a>
+      <a href="{{route('/categories')}}" class="block hover:bg-gray-700 p-2 rounded">Products Categories</a>
        
         <a href="{{ url('/logout') }}" class="block hover:bg-red-700 p-2 rounded">🚪 Logout</a>
         

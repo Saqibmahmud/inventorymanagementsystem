@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class HomeController extends Controller
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware ;
+class HomeController extends Controller //implements HasMiddleware
 {
-    /**
-     * Display a listing of the resource.
-     */
+//     public static function middleware(){
+//         return [
+// new Middleware('permission:View-Homepage',only:['index']),
+
+//         ];
+
+//     }
+
     public function index()
     {
         return view('welcome');

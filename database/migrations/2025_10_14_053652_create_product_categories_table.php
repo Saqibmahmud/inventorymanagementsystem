@@ -10,13 +10,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+    { //product_category_name','product_category_code','status'
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->string('product_category_name');
-            $table->string('product_category_code')->unique() ;
-            $table->enum('status',['active','inactive'])->default('active');
-           
+            $table->string('product_category_code')->unique();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

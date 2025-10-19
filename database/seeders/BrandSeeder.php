@@ -15,7 +15,9 @@ class BrandSeeder extends Seeder
      */
     public function run(): void
     {
-        Brands::create(['brand_name'=>'Brand A','brand_code'=>'BR-A','status'=>'active']);
-    Brands::create(['brand_name'=>'Brand B','brand_code'=>'BR-B','status'=>'active']);
+       Brands::create(['brand_name'=>'Samsung','brand_code'=>'brc-sgT','status'=>'1']);
+       Brands::create(['brand_name'=>'Apple','brand_code'=>'brc-aeT','status'=>'1']);
+       Brands::create(['brand_name'=>'Oppo','brand_code'=>'brc-ooT','status'=>'1']);
+       
     }
 }
