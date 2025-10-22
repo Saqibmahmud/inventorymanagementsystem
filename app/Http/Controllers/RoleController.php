@@ -7,8 +7,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreRolesRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
+
 class RoleController extends Controller //implements HasMiddleware
 {
 //    public static function middleware(): array

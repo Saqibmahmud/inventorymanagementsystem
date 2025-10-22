@@ -1,3 +1,11 @@
+<style>
+.cursor_pointer :hover{
+  cursor: pointer;
+}
+
+
+</style>
+
 @extends('layout.app')
 @section('content')
 <div class="card">
@@ -21,16 +29,31 @@
 @error('name')
 <p class="alert alert-danger">{{$message}}</p>
 @enderror
-@foreach($allPermission as $per)
-@if(isset($hasPermission))
-<input {{($hasPermission->contains($per->name)) ? 'checked': ''}}  type="checkbox" name="permissions[]" value="{{$per->name}}"  >
-@else
-<input type="checkbox" name="permissions[]" value="{{$per->name}}"  >
-@endif
-<label for="">{{$per->name}}</label>
-@endforeach
-<br>
-
+<div class="row">
+        @foreach($allPermission as $per)
+            
+           
+            <div class="col-lg-2 col-md-3 col-sm-6 mb-2">
+                <div class="form-check">
+           
+                    <input 
+                        class="form-check-input cursor_pointer" 
+                        type="checkbox" 
+                        name="permissions[]" 
+                        value="{{ $per->name }}" 
+                        id="permission-{{ Str::slug($per->name) }}"
+                        @if(isset($hasPermission) && $hasPermission->contains($per->name)) 
+                            checked 
+                        @endif
+                    >
+                    
+                    <label class="form-check-label" for="permission-{{ Str::slug($per->name) }}">
+                        {{ $per->name }}
+                    </label>
+                </div>
+            </div>
+        @endforeach
+</div>
 <input type="submit" class="btn btn-primary mt-0" value="Confirm">
 </form>
 </div>

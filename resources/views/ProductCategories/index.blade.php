@@ -51,24 +51,19 @@
           
           <td>{{$d['product_category_name']}}</td>
           <td>{{$d['product_category_code']}}</td>
-          <td>{{$d['status']}}</td>
+          <td>{{($d['status']==1)?'Active':'Inactive'}}</td>
           <td>{{$d['created_at']}}</td>
           <td>{{$d['updated_at']}}</td>
           <td >
             <a href="{{'#'}}" class="btn btn-info btn-sm" title="View"><i class="fas fa-eye"></i></a>
             <a href="{{route('categories.edit',['category'=>$d['id']])}}" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
-           
-           <form action="{{route('brands.destroy',['brand'=>$d['id']])}}" method="post" style="display:inline">
-            @method('DELETE')
-            @csrf
-         <button type="submit" value="Delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you Sure')"><i class="fas fa-trash-alt"></i></button>
-            {{-- <a href="{{route('brands.destroy',['brand'=>$d['id']])}}" class="btn btn-danger btn-sm" onclick="confirm('Are You sure')" title="Delete"><i class="fas fa-trash-alt"></i></a> --}}
-           </form>
+             <a href="javascript:void(0)" onclick="deleteCategory({{$d['id']}},'{{$d['product_category_name']}}',this)" class="btn btn-danger btn-sm"  title="Delete"><i class="fas fa-trash-alt"></i></a>
+          
         </tr>
               @endforeach
               </tbody>
     </table>
-    <a href="{{url('/')}}" class="btn btn-secondary mt-3">Back</a>
+    <a href="{{route('dashboard')}}" class="btn btn-secondary mt-3">Back</a>
   </div>
   <div class="card-footer center">
     {{$data->links('pagination::bootstrap-5')}}
@@ -86,5 +81,33 @@ setTimeout(() => {
   
 
 }
-  })
+  });
+  function deleteCategory(id,name,btn){
+  if(confirm("Are you sure you want to delete, category="+name+"?")){
+ let row= $(btn).closest('tr');
+ $.ajax({
+url:"{{url('categories')}}/"+id,
+type:'DELETE',
+data:{
+  id:id,
+  _token:'{{csrf_token()}}'
+},
+success:(response)=>{
+  if(response.status){
+    row.remove();
+  }
+  else
+  alert(response.message);
+
+},
+error:(xhr)=>{
+alert("An error occured"+xhr.statusText)
+
+}
+
+
+ })
+  }
+
+  }
 </script>

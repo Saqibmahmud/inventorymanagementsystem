@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRolesRequest extends FormRequest
+class StoreBrandsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user() && $this->user()->can('Add-Brand');
     }
 
     /**
@@ -22,9 +22,9 @@ class StoreRolesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            "name" => 'required|unique:roles,name',
-            "permissions" => 'array', 
+             'brand_name'=>'required',
+            'brand_code'=>'required',
+            'status'=>'required'
         ];
     }
 }

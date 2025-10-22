@@ -12,19 +12,19 @@ use Illuminate\Http\Request;
 
 class PermissionController extends Controller //implements HasMiddleware
 {
-//  public static function middleware(): array
-// {
-//     return [
-//         new Middleware('permission:View-Permission', only: ['index']),
-//         new Middleware('permission:Create-Permission', only: ['create','store']),
-//         new Middleware('permission:Edit-Permission', only: ['edit','update']),
-//         new Middleware('permission:Delete-Permission', only: ['destroy'])
-//     ];
-// }
-    public function index(){
-$allPermissions= Permission::orderBy('id','DESC')->paginate(10);
-return view('Permissions.index', ['data'=>$allPermissions]);
+
+public function index(Request $request) {
+    $permissions = Permission::orderBy('id','DESC')->paginate(10);
+
+    if ($request->ajax()) {
+        $html = view('Permissions.load_data', ['permissions' => $permissions])->render();
+        return response()->json(['html' => $html]);
+    }
+
+    return view('Permissions.index', ['permissions' => $permissions]);
 }
+
+
 public function create(){
    return view('Permissions.create');
 }
@@ -63,6 +63,14 @@ public function destroy($id){
    ]);
 
 }
+
+public function search(Request $request){
+   $query = $request->input('query');
+   $permissions = Permission::where('name','LIKE', "%$query%")->paginate(10);
+
+   return view('Permissions.index', compact('permissions'));
+}
+
 
 
 

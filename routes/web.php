@@ -8,6 +8,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SupplierController;
 
 ;
 
@@ -20,6 +22,28 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+//Suppliers
+    Route::resource('suppliers',SupplierController::class)->middleware([
+'index'=>'permission:View-Supplier',
+'create'=>'permission:Add-Supplier',
+'store'=>'permission:Add-Supplier',
+'edit'=>'permission:Edit-Supplier',
+'update'=>'permission:Edit-Supplier',
+'destroy'=>'permission:Delete-Supplier'
+    ]);
+
+
+   //Customers
+   Route::resource('customers',CustomerController::class)->middleware([
+'index'=>'permission:View-Customer',
+'create'=>'permission:Add-Customer',
+'store'=>'permission:Add-Customer',
+'edit'=>'permission:Edit-Customer',
+'update'=>'permission:Edit-Customer',
+'destroy'=>'permission:Delete-Customer'
+
+   ]);
+   
     //Roles
     Route::resource('roles',RoleController::class)->middleware([
     'index'=>'permission:View-Role',
@@ -41,20 +65,46 @@ Route::middleware('auth')->group(function () {
     ]);
     
     //PERMISSIONS
+    Route::get('permissions/search',[PermissionController::class,'search'])->name('permissions.search')->middleware('permission:View-Permission');
     Route::delete('permission/{id}',[PermissionController::class,'destroy'])->name('permissions.destroy')->middleware('permission:Delete-Permission');
     Route::get('permissions/{id}/edit',[PermissionController::class,'edit'])->name('permissions.edit')->middleware('permission:Edit-Permission');
     Route::put('permissions/{id}',[PermissionController::class,'update'])->name('permissions.update')->middleware('permission:Edit-Permission');
     Route::post('permissions',[PermissionController::class,'store'])->name('permissions.store')->middleware('permission:Add-Permission');
     Route::get('permissions/create',[PermissionController::class,'create'])->name('permissions.create')->middleware('permission:Add-Permission');
     Route::get('permissions',[PermissionController::class,'index'])->name('permissions.index')->middleware('permission:View-Permission');
-   //BRANDS 
+   
+    //BRANDS 
     Route::get('brands/search',[ BrandsController::class,'Search'])->name('brands.search');
-    Route::resource('brands', BrandsController::class);
+    Route::resource('brands', BrandsController::class)->middleware([
+'index'=>'permission:View-Brand',
+'create'=>'permission:Add-Brand',
+'store'=>'permission:Add-Brand',
+'edit'=>'permission:Edit-Brand',
+'update'=>'permission:Edit-Brand',
+'destroy'=>'permission:Delete-Brand'
+    ]);
+   
     //Category
     Route::get('categories/search',[ ProductCategoriesController::class,'Search'])->name('categories.search');
-    Route::resource('categories', ProductCategoriesController::class);
+    Route::resource('categories', ProductCategoriesController::class)->middleware([
+'index'=>'permission:View-Category',
+'create'=>'permission:Add-Category',
+'store'=>'permission:Add-Category',
+'edit'=>'permission:Edit-Category',
+'update'=>'permission:Edit-Category',
+'destroy'=>'permission:Delete-Category'
+    ]);
+  
     //Products
-    Route::resource('products', ProductsController::class);
+    Route::resource('products', ProductsController::class)->middleware([
+'index'=>'permission:View-Product',
+'create'=>'permission:Add-Product',
+'store'=>'permission:Add-Product',
+'edit'=>'permission:Edit-Product',
+'update'=>'permission:Edit-Product',
+'destroy'=>'permission:Delete-Product'
+    ]);
+   
     //Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

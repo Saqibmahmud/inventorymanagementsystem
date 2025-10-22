@@ -12,17 +12,9 @@ use Illuminate\Routing\Controllers\Middleware;
 
 class UserController extends Controller //implements HasMiddleware
 {
-//      public static function middleware(): array
-// {
-//     return [
-//         new Middleware('permission:View-User', only: ['index']),
-//         new Middleware('permission:Create-User', only: ['create','store']),
-//         new Middleware('permission:Edit-User', only: ['edit','update']),
-//         new Middleware('permission:Delete-User', only: ['destroy'])
-//     ];
-// }
+
     public function index()
-    { $all_users=User::orderBy('id','Desc')->paginate(5);
+    { $all_users=User::orderBy('id','Desc')->paginate(10);
       //$role=$all_users->roles->pluck['name']; 
         return view('Users.index',['data'=>$all_users]);
     }
@@ -90,9 +82,9 @@ return view('Users.create_edit',['data'=>$user,'roles'=>$roles,'hasRole'=>$hasRo
         ]);
       }
         $user->delete();
-session()->flash('success',"Succesfully Deleted User");
-return response()->json([
-'status'=>true,
-]);
+        session()->flash('success',"Succesfully Deleted User");
+        return response()->json([
+        'status'=>true,
+        ]);
     }
 }

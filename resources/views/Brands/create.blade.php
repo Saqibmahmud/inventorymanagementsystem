@@ -21,9 +21,8 @@
     </div>
        <label for="status" class="form-label">Status</label>
        <select name="status" class="form-control">
-        <option value="">Select Status</option>
-<option value="Active" {{old('status')=='Active' ? 'selected' : ''}}>Active</option>
-<option value="Inacticve"{{old('status')=='Inactive' ? 'selected' : ''}}>Inactive</option>
+<option value=1 {{old('status')==1 ? 'selected' : ''}}>Active</option>
+<option value=0 {{old('status')==0 ? 'selected' : ''}}>Inactive</option>
 
        </select>
            

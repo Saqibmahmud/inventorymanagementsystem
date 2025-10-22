@@ -43,6 +43,16 @@
         <a href="{{route('users.index')}}" class="nav-link">Users</a>
       </li>
       @endcan
+      @can('View-Customer')
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('customers.index')}}" class="nav-link">Customers</a>
+      </li>
+      @endcan
+      @can('View-Supplier')
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('suppliers.index')}}" class="nav-link">Suppliers</a>
+      </li>
+      @endcan
       @if(Auth::check())
       <li class="nav-item d-none d-sm-inline-block">
        <form method="POST" action={{route('logout')}}>@csrf @method('Post')<button class="nav-link">LogOut</button>   </form>
@@ -228,7 +238,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('products.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Products</p>
                 </a>

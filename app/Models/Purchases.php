@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Purchases extends Model
 {
     protected $fillable=['supplier_id','purchase_date','total_amount','status','created_by'];
-public function Supplier(){
+public function supplier(){
     return $this->belongsTo(Supplier::class)  ;
 }
 public function user(){
     return $this->belongsTo(User::class,'created_by','id');
 }
-public function Purchase_items(){
+public function purchase_items(){
     return $this->hasMany(Purchases_Items::class);
 } 
 public function stock_transactions(){

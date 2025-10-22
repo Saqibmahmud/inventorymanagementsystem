@@ -27,8 +27,8 @@
        <label for="status" class="form-label">Status</label>
         <select name="status" class="form-control">
         <option value="">Select Status</option>
-        <option value="active" {{ strtolower(old('status', $data->status)) == 'active' ? 'selected' : '' }}>Active</option>
-        <option value="inactive" {{ strtolower(old('status', $data->status)) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+        <option value=1 {{ old('status', $data->status) == 1 ? 'selected' : '' }}>Active</option>
+        <option value=0 {{ old('status', $data->status) == 0 ? 'selected' : '' }}>Inactive</option>
         </select>
 
            

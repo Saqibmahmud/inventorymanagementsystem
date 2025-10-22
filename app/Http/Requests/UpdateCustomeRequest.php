@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRolesRequest extends FormRequest
+class UpdateCustomeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,11 +20,11 @@ class StoreRolesRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
+    {$customer= $this->route('customer');
         return [
-            
-            "name" => 'required|unique:roles,name',
-            "permissions" => 'array', 
+             'customer_name'=>'required|string',
+            'customer_email'=>'email|nullable|unique:customers,customer_email,'.$customer,
+            'customer_phone'=>'required|min_digits:11|max_digits:11|unique:customers,customer_phone,'.$customer
         ];
     }
 }

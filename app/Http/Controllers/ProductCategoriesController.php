@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProductCategoriesController extends Controller
 {
     public function Index(){
-        $allCategories =Product_Categories::paginate(5)->withQueryString();
+        $allCategories =Product_Categories::paginate(10)->withQueryString();
         return view('productcategories.index',['data'=>$allCategories]);
     }
 
@@ -20,7 +20,7 @@ class ProductCategoriesController extends Controller
     public function Store(Request $request){
         $request->validate([
             'product_category_name'=>'required',
-            'product_category_code'=>'required',
+            'product_category_code'=>'required | unique:product_categories,product_category_code',
             'status'=>'required'
         ]);
         $category= new Product_Categories();
@@ -47,7 +47,23 @@ class ProductCategoriesController extends Controller
         return redirect()->route('categories.index')->with('success','Category updated successfully');
 
     }
+  public function Destroy($category){
+  $cate=Product_Categories::where('id',$category)->first() ;
+  if(!$cate){
+    session()->flash('error',"Profuct Category Not Found");
+     return response()->json([
+        'status'=>false,
+        'message'=>"Category Not Found"
+     ]);
+  }
+  $cate->delete() ;
+  session()->flash('success',"Category Deleted Successfully");
+    return response()->json([
+        'status'=>true,
+        'message'=>"Category Deleted Successfully"
+     ]);
 
+    }
 
      
 
@@ -57,7 +73,7 @@ public function Search(Request $request){
 $query= $request->input('query');
 $categories= Product_Categories::Where('product_category_name','LIKE',"%{$query}%")
                                  ->orWhere('product_category_code','LIKE',"%{$query}%")
-                                 ->paginate(5) ;
+                                 ->paginate(10) ;
 return view('productcategories.index',['data'=>$categories]);
 
 

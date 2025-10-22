@@ -45,7 +45,7 @@
               @endforeach
               </tbody>
     </table>
-    <a href="{{url('/')}}" class="btn btn-secondary mt-3">Back</a>
+    <a href="{{route('dashboard')}}" class="btn btn-secondary mt-3">Back</a>
   </div>
    <div class="card-footer center">
     {{$data->links('pagination::bootstrap-5')}}

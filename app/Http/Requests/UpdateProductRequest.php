@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRolesRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,11 +20,15 @@ class StoreRolesRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
+    { $Id= $this->route('product') ;
         return [
-            
-            "name" => 'required|unique:roles,name',
-            "permissions" => 'array', 
+            'product_name'=>'required',
+            'sku'=>'required|unique:products,sku,'.$Id,
+            'brands_id'=>'required|exists:brands,id',
+            'product_categories_id'=>'required|exists:product_categories,id',
+            'description'=>'required',
+            'price'=>'required|numeric',
+            'reorder_level'=>'required|integer'
         ];
     }
 }

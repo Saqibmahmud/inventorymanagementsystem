@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBrandsRequest;
 use App\Models\Brands;
 use Illuminate\Http\Request;
 
 class BrandsController extends Controller
 {
-    //
+    
     public function Index(){
- $allBrands=Brands::paginate(5)->withQueryString();;
+ $allBrands=Brands::paginate(10)->withQueryString();;
 
 
 return view('brands.index',['data'=>$allBrands]);
@@ -19,13 +20,7 @@ return view('brands.index',['data'=>$allBrands]);
         return view('brands.create');
     }
 
-    public function Store(Request $request){
-       
-        $request->validate([
-            'brand_name'=>'required',
-            'brand_code'=>'required',
-            'status'=>'required'
-        ]);
+    public function Store(StoreBrandsRequest $request){
         $brands= new Brands() ;
         $brands->brand_name=$request->input('brand_name');
         $brands->brand_code = $request->input('brand_code');
@@ -70,10 +65,22 @@ return view('brands.index',['data'=>$allBrands]);
 }
 
     }
+
     public function Destroy($brand){
-  $brand=Brands::where('id',$brand)->first() ;
-  $brand->delete() ;
-    return redirect()->route('brands.index')->with('delete_success','Brand Deleted Successfully') ;
+  $existing_brand=Brands::where('id',$brand)->first() ;
+  if(!$existing_brand){
+    session()->flash('error',"Brand Not Found");
+     return response()->json([
+        'status'=>false,
+        'message'=>"Brand Not Found"
+     ]);
+  }
+  $existing_brand->delete() ;
+  session()->flash('success',"Brand Deleted Successfully");
+    return response()->json([
+        'status'=>true,
+        'message'=>"Brand Deleted Successfully"
+     ]);
 
     }
 
@@ -81,7 +88,7 @@ return view('brands.index',['data'=>$allBrands]);
     $query= $request->input('query') ;
     $brands= Brands::where('brand_name','LIKE',"%{$query}%")
                    ->orWhere('brand_code','LIKE',"%{$query}%")
-                ->paginate(5);
+                ->paginate(10);
                 
     return view('brands.index',['data'=>$brands]) ;
                    
