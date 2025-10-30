@@ -20,12 +20,14 @@ class UpdateUserRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
+    { $id= $this->route('user');
         return [
             'name'=>'required',
             'password'=>'required',
-            'email'=>'required|email',
-            'roles'=> 'required|array'
+            'email'=>'required|email|unique:users,email,'.$id,
+            'branch_id'=>'required|numeric',
+            'roles'=> 'required|array',
+             'branch_id'=>'required|numeric'
         ];
     }
 }

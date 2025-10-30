@@ -22,13 +22,15 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     { $Id= $this->route('product') ;
         return [
+            'supplier_id'=>'required|exists:suppliers,id',
             'product_name'=>'required',
             'sku'=>'required|unique:products,sku,'.$Id,
             'brands_id'=>'required|exists:brands,id',
             'product_categories_id'=>'required|exists:product_categories,id',
             'description'=>'required',
             'price'=>'required|numeric',
-            'reorder_level'=>'required|integer'
+            'reorder_level'=>'required|integer',
+            'branch_id'=>'required|numeric'
         ];
     }
 }

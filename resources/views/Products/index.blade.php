@@ -17,6 +17,7 @@
       <thead>
         <tr>
           <th>Product Name</th>
+          <th>Supplier</th>
           <th>Code/SKU</th>
           <th>Brand</th>
           <th>Category</th>
@@ -35,6 +36,7 @@
         <tr>
           
           <td>{{$d['product_name']}}</td>
+          <td>{{$d->supplier->supplier_name}}</td>
           <td>{{$d['sku']}}</td>
           <td>{{$d->brands->brand_name}}</td>
           <td>{{$d->product_categories->product_category_name}}</td>
@@ -58,7 +60,7 @@
   </div>
    
 </div>
-@endsection
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() { 
@@ -78,3 +80,4 @@ $(document).ready(function() {
 }); 
   
 </script>
+@endsection

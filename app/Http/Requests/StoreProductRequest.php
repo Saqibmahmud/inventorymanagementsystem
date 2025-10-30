@@ -22,13 +22,16 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'supplier_id'=>'required|exists:suppliers,id',
             'product_name'=>'required',
             'sku'=>'required|unique:products,sku',
             'brands_id'=>'required|exists:brands,id',
             'product_categories_id'=>'required|exists:product_categories,id',
             'description'=>'required',
             'price'=>'required|numeric',
-            'reorder_level'=>'required|integer'
+            'branch_id'=>'required|numeric',
+            'reorder_level'=>'required|integer',
+            'branch_id'=>'required|numeric',
         ];
     }
 }

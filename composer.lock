@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fa67f71c8fce82dcb6b54ea617719fb",
+    "content-hash": "8decedd200961efde0fe3c639019b923",
     "packages": [
         {
             "name": "brick/math",
@@ -209,6 +209,160 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
             "time": "2024-07-08T12:26:09+00:00"
+        },
+        {
+            "name": "doctrine/dbal",
+            "version": "4.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/dbal.git",
+                "reference": "1a2fbd0e93b8dec7c3d1ac2b6396a7b929b130dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1a2fbd0e93b8dec7c3d1ac2b6396a7b929b130dc",
+                "reference": "1a2fbd0e93b8dec7c3d1ac2b6396a7b929b130dc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/deprecations": "^1.1.5",
+                "php": "^8.2",
+                "psr/cache": "^1|^2|^3",
+                "psr/log": "^1|^2|^3"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "14.0.0",
+                "fig/log-test": "^1",
+                "jetbrains/phpstorm-stubs": "2023.2",
+                "phpstan/phpstan": "2.1.30",
+                "phpstan/phpstan-phpunit": "2.0.7",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpunit/phpunit": "11.5.23",
+                "slevomat/coding-standard": "8.24.0",
+                "squizlabs/php_codesniffer": "4.0.0",
+                "symfony/cache": "^6.3.8|^7.0",
+                "symfony/console": "^5.4|^6.3|^7.0"
+            },
+            "suggest": {
+                "symfony/console": "For helpful console commands such as SQL execution and import of files."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\DBAL\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                }
+            ],
+            "description": "Powerful PHP database abstraction layer (DBAL) with many features for database schema introspection and management.",
+            "homepage": "https://www.doctrine-project.org/projects/dbal.html",
+            "keywords": [
+                "abstraction",
+                "database",
+                "db2",
+                "dbal",
+                "mariadb",
+                "mssql",
+                "mysql",
+                "oci8",
+                "oracle",
+                "pdo",
+                "pgsql",
+                "postgresql",
+                "queryobject",
+                "sasql",
+                "sql",
+                "sqlite",
+                "sqlserver",
+                "sqlsrv"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/dbal/issues",
+                "source": "https://github.com/doctrine/dbal/tree/4.3.4"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdbal",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-10-09T09:11:36+00:00"
+        },
+        {
+            "name": "doctrine/deprecations",
+            "version": "1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/deprecations.git",
+                "reference": "459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38",
+                "reference": "459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<=7.5 || >=13"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^9 || ^12 || ^13",
+                "phpstan/phpstan": "1.4.10 || 2.1.11",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6 || ^10.5 || ^11.5 || ^12",
+                "psr/log": "^1 || ^2 || ^3"
+            },
+            "suggest": {
+                "psr/log": "Allows logging deprecations via PSR-3 logger implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Deprecations\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A small layer on top of trigger_error(E_USER_DEPRECATED) or PSR-3 logging with options to disable all deprecations or selectively for packages.",
+            "homepage": "https://www.doctrine-project.org/",
+            "support": {
+                "issues": "https://github.com/doctrine/deprecations/issues",
+                "source": "https://github.com/doctrine/deprecations/tree/1.1.5"
+            },
+            "time": "2025-04-07T20:06:18+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1052,6 +1206,76 @@
                 }
             ],
             "time": "2025-08-22T14:27:06+00:00"
+        },
+        {
+            "name": "inertiajs/inertia-laravel",
+            "version": "v2.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inertiajs/inertia-laravel.git",
+                "reference": "07da425d58a3a0e3ace9c296e67bd897a6e47009"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/07da425d58a3a0e3ace9c296e67bd897a6e47009",
+                "reference": "07da425d58a3a0e3ace9c296e67bd897a6e47009",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^10.0|^11.0|^12.0",
+                "php": "^8.1.0",
+                "symfony/console": "^6.2|^7.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.2",
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.16",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^8.0|^9.2|^10.0",
+                "phpunit/phpunit": "^10.4|^11.5",
+                "roave/security-advisories": "dev-master"
+            },
+            "suggest": {
+                "ext-pcntl": "Recommended when running the Inertia SSR server via the `inertia:start-ssr` artisan command."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Inertia\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "./helpers.php"
+                ],
+                "psr-4": {
+                    "Inertia\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "homepage": "https://reinink.ca"
+                }
+            ],
+            "description": "The Laravel adapter for Inertia.js.",
+            "keywords": [
+                "inertia",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/inertiajs/inertia-laravel/issues",
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v2.0.10"
+            },
+            "time": "2025-09-28T21:21:36+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2726,6 +2950,55 @@
             "time": "2025-08-21T11:53:16+00:00"
         },
         {
+            "name": "psr/cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
+            },
+            "time": "2021-02-03T23:26:27+00:00"
+        },
+        {
             "name": "psr/clock",
             "version": "1.0.0",
             "source": {
@@ -3412,6 +3685,106 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.1"
             },
             "time": "2025-09-04T20:59:21+00:00"
+        },
+        {
+            "name": "rmunate/spell-number",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmunate/SpellNumber.git",
+                "reference": "4dfa6b72328968bb001af97ec6072796c03fa0c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmunate/SpellNumber/zipball/4dfa6b72328968bb001af97ec6072796c03fa0c1",
+                "reference": "4dfa6b72328968bb001af97ec6072796c03fa0c1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rmunate\\Utilities\\Providers\\SpellNumberProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rmunate\\Utilities\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raul Mauricio Uñate Castro",
+                    "email": "raulmauriciounate@gmail.com",
+                    "homepage": "https://github.com/rmunate",
+                    "role": "owner"
+                },
+                {
+                    "name": "Olsza",
+                    "homepage": "https://github.com/olsza",
+                    "role": "developer"
+                },
+                {
+                    "name": "Er. Ashok Devatwal",
+                    "email": "ashokdev78@gmail.com",
+                    "homepage": "https://github.com/ashokdevatwal",
+                    "role": "developer"
+                },
+                {
+                    "name": "Siros Fakhri",
+                    "homepage": "https://github.com/sirosfakhri",
+                    "role": "developer"
+                },
+                {
+                    "name": "Jens Twesmann",
+                    "homepage": "https://github.com/jetwes",
+                    "role": "developer"
+                },
+                {
+                    "name": "Gabriel Rausch",
+                    "homepage": "https://github.com/gdsrmygdsrjr",
+                    "role": "developer"
+                },
+                {
+                    "name": "Alejandro Diaz",
+                    "homepage": "https://github.com/alejandrodiazpinilla",
+                    "role": "developer"
+                }
+            ],
+            "description": "Easily convert numbers to letters, this library supports the native PHP INTL extension with which we can easily convert numbers to letters. This library provides us with the possibility of converting only to numbers or to currency formats depending on the language to be used, this package has support in the languages en: English, es: Spanish, pt: Portuguese, fr: French, it: Italian, ro: Romanian, fa: Farsi, hi: Hindi, pl: Polish.",
+            "homepage": "https://github.com/rmunate/SpellNumber",
+            "keywords": [
+                "code-maestro",
+                "numbers",
+                "rmunate",
+                "spell",
+                "spell-number",
+                "spell-numbers",
+                "toletters",
+                "towords"
+            ],
+            "support": {
+                "issues": "https://github.com/rmunate/SpellNumber/issues",
+                "source": "https://github.com/rmunate/SpellNumber/tree/v4.3.0"
+            },
+            "abandoned": "illuminate/support",
+            "time": "2025-06-10T14:06:51+00:00"
         },
         {
             "name": "spatie/laravel-permission",

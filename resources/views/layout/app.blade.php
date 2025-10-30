@@ -10,7 +10,7 @@
   @include('partials.styles')
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed ">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -186,7 +186,8 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-light-cyan elevation-2">
+  <aside class="main-sidebar sidebar-dark-info elevation-2">
+">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
       <img src="{{ asset('assets/dist/img/images.png') }}" alt="Inventory Logo" class="brand-image img elevation-3" style="opacity: .8">
@@ -215,12 +216,88 @@
               <p>Dashboard</p>
             </a>
           </li>
+          {{-- Purchases er menu --}}
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-clipboard-check"></i>
               <p>
-                Information
+                Purchase
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('purchases.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Purchase</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('purchases.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create Purchase</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+            {{-- Sales er menu --}}
+              <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-check"></i>
+              <p>
+                Sales
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Invoice</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create Invoice</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+          {{-- Products Category er menu --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-product-hunt"></i>
+              <p>
+                Products
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('products.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Products</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('products.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Product</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+
+          {{-- Brands er menu --}}
+               <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th "></i>
+              <p>
+                Brands
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -228,21 +305,91 @@
               <li class="nav-item">
                 <a href="{{ route('brands.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Brands</p>
+                  <p>All Brands</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('categories.index')}}" class="nav-link">
+                <a href="{{route('brands.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Product Categories</p>
+                  <p>Add Brand</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+  {{-- Products Category er menu --}}
+       <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-list-ul"></i>
+              <p>
+                Product Categories
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('categories.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Categories</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('products.index')}}" class="nav-link">
+                <a href="{{route('categories.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Products</p>
+                  <p>Add Category</p>
                 </a>
               </li>
+            
+            </ul>
+          </li>
+{{--  Customers er menu --}}
+ <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Customers
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('customers.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Customers</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('customers.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Customer</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          {{--  Employee er menu --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                HRM
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('users.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Employees</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('users.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Employee</p>
+                </a>
+              </li>
+             
             </ul>
           </li>
 
@@ -297,6 +444,6 @@
 @include('partials.scripts')
 @isset($script)
 {{$script}}  
-@endif
+@endisset
 </body>
 </html>

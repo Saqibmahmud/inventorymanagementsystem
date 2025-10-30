@@ -1,5 +1,14 @@
+<style>
+.plus_icon{
+    background-color:greenyellow;
+    font:small;
+     padding:2px;
+     cursor:pointer;
+        border-radius: 40%;
+     
+}
+</style>
 @extends('layout.app')
-
 @section('content')
 <div class="card">
 <div class="card-header">
@@ -18,6 +27,17 @@
         @if(isset($data))
          @method('PUT') 
          @endif
+<label for="supplier_id">Supplier Name</label>
+<select type="text" name="supplier_id" class="form-control" >
+  <option value="">--Select Supplier--</option>
+    @foreach ($suppliers as $sup)
+    <option value="{{old('supplier_id',$sup->id)}}"{{isset($data->supplier_id) && $data->supplier_id == $sup->id? 'selected':''  }}  >{{$sup->supplier_name}}</option>
+    @endforeach
+</select>
+    @error('supplier_id')
+<p class="text-danger">{{$message}}</p>  
+@enderror
+
 <label for="product_name">Product Name</label>
 <input type="text" name="product_name" class="form-control" value='{{old('product_name',$data->product_name ?? '')}}'>
 @error('product_name')
@@ -29,7 +49,7 @@
 <p class="text-danger">{{$message}}</p>  
 @enderror
 
-<label for="brands_id" class="form-label">Brand Name</label>
+<label for="brands_id" class="form-label">Brand Name</label><a href="{{route('brands.create')}}"> <i class="fas fa-plus plus_icon" ></i></a>
 
 <select name="brands_id" id="brands_id" class="form-control" required>
 <option value="">Select Brand</option>
@@ -42,7 +62,7 @@
 <p class="text-danger">{{$message}}</p>
 @enderror 
 
-<label for="product_categories_id" class="form-label">Category Name</label>
+<label for="product_categories_id" class="form-label">Category Name</label><a href="{{route('categories.create')}}"> <i class="fas fa-plus plus_icon" ></i></a>
 <select name="product_categories_id" class='form-control'>
 <option value="">Select Category</option>
 

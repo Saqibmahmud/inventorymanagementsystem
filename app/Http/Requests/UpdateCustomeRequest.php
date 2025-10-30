@@ -24,6 +24,7 @@ class UpdateCustomeRequest extends FormRequest
         return [
              'customer_name'=>'required|string',
             'customer_email'=>'email|nullable|unique:customers,customer_email,'.$customer,
+            'branch_id'=>'required|numeric',
             'customer_phone'=>'required|min_digits:11|max_digits:11|unique:customers,customer_phone,'.$customer
         ];
     }

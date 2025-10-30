@@ -17,6 +17,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'branch_id'=>'required|numeric',
             'email' => [
                 'required',
                 'string',

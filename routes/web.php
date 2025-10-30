@@ -22,7 +22,22 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-//Suppliers
+
+//purchases
+    Route::resource('purchases',App\Http\Controllers\PurchasesController::class)->middleware([
+'index'=>'permission:View-Purchase',
+'create'=>'permission:Add-Purchase',
+'store'=>'permission:Add-Purchase',
+'edit'=>'permission:Edit-Purchase',
+'update'=>'permission:Edit-Purchase',
+'destroy'=>'permission:Delete-Purchase'
+    ]);
+
+
+
+
+
+    //Suppliers
     Route::resource('suppliers',SupplierController::class)->middleware([
 'index'=>'permission:View-Supplier',
 'create'=>'permission:Add-Supplier',
@@ -96,6 +111,8 @@ Route::middleware('auth')->group(function () {
     ]);
   
     //Products
+    Route::get('products/search', [ProductsController::class, 'search'])->name('products.search');
+
     Route::resource('products', ProductsController::class)->middleware([
 'index'=>'permission:View-Product',
 'create'=>'permission:Add-Product',
