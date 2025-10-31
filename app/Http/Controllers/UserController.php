@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Branches;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Routing\Controllers\Middleware;
 
-class UserController extends Controller //implements HasMiddleware
+class UserController extends Controller 
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:View-User')->only(['index']);
+        $this->middleware('permission:Add-User')->only(['create','store']);
+        $this->middleware('permission:Edit-User')->only(['edit','update']);
+        $this->middleware('permission:Delete-User')->only(['destroy']);
+        
+    }
 
     public function index()
     { $all_users=User::orderBy('id','Desc')->paginate(10);
@@ -23,8 +34,10 @@ class UserController extends Controller //implements HasMiddleware
      * Show the form for creating a new resource.
      */
     public function create()
-    {$roles= Role::all();
-        return view('Users.create_edit',['roles'=>$roles]);
+    {
+        $roles= Role::all();
+        $branches= Branches::all();
+        return view('Users.create_edit',['roles'=>$roles,'branches'=>$branches]);
     }
 
     /**
@@ -61,15 +74,15 @@ return view('Users.create_edit',['data'=>$user,'roles'=>$roles,'hasRole'=>$hasRo
         if(!$user){
             return redirect()->route('users.index')->with('error',"User not found");
         }
-       
+      
         $user->name=$request->name ;
         $user->email=$request->email ;
-        $user->SyncRoles($request->roles);
         $user->save();
+        $user->syncRoles($request->roles);
         return redirect()->route('users.index')->with('success',"Succesfully Updated USER");
-        
+       
+             
     }
-
     
     public function destroy(string $id)
     {

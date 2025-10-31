@@ -22,11 +22,14 @@
 @error('name')
 <p class="text-danger">{{$message}}</p>  
 @enderror
-<label for="name">User Password</label>
-<input type="password" name="password" class="form-control" value='{{old('password',$data->password?? '')}}'>
+@if(!isset($data))
+<label for="password">User Password</label>
+<input type="password" name="password" class="form-control">
 @error('password')
 <p class="text-danger">{{$message}}</p>  
 @enderror
+@endif
+
 <label for="email">User Email</label>
 <input type="text" name="email" class="form-control" value='{{old('email',$data->email?? '')}}'>
 @error('email')
@@ -44,6 +47,22 @@
 @error('roles')
 <p class="text-danger">{{$message}}</p>  
 @enderror
+
+
+  
+
+<label for='branch'>Branch</label>
+<select name='branch_id'>
+  <option value-=''>--Select Branch--</option>
+  @foreach ($branches as $branch )
+  <option value="{{$branch->id}}" {{isset($data)&& $data->branch_id == $branch->id ?'selected':''}} > {{$branch->name}}</option>   
+@endforeach
+</select>
+@error('branch_id')
+<p class="text-danger">{{$message}}</p>  
+@enderror
+
+
 <br>
 
 <input type="submit" class="btn btn-primary mt-0" value="Confirm">

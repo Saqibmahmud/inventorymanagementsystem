@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Product_Categories;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-
-class ProductCategoriesController extends Controller
+class ProductCategoriesController extends Controller 
 {
+
+    public function __construct() {
+        $this->middleware('permission:View-Category')->only(['index']);
+        $this->middleware('permission:Add-Category')->only(['create','store']);
+        $this->middleware('permission:Edit-Category')->only(['edit','update']);
+        $this->middleware('permission:Delete-Category')->only(['destroy']);
+    }
     public function Index(){
         $allCategories =Product_Categories::paginate(10)->withQueryString();
         return view('productcategories.index',['data'=>$allCategories]);

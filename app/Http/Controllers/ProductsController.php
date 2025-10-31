@@ -9,9 +9,17 @@ use App\Models\Products;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class ProductsController extends Controller
+class ProductsController extends Controller 
 {
+
+  public function __construct() {
+    $this->middleware('permission:View-Product')->only(['index']);
+    $this->middleware('permission:Add-Product')->only(['create','store']);
+    $this->middleware('permission:Edit-Product')->only(['edit','update']);
+    $this->middleware('permission:Delete-Product')->only(['destroy']);
+  }
     public function index(){
         $allProducts=Products::with('product_categories','brands','supplier')->paginate(10);
 return view('products.index',['data'=>$allProducts]);

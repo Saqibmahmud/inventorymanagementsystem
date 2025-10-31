@@ -29,7 +29,7 @@
         <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
       </li>
       @can('View-Permission')
-      <li class="nav-item d-none d-sm-inline-block">
+            <li class="nav-item d-none d-sm-inline-block"> 
         <a href="{{route('permissions.index')}}" class="nav-link">Permissions</a>
       </li>
       @endcan
@@ -387,6 +387,31 @@
                 <a href="{{route('users.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Employee</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+           {{--  Branch er menu --}}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-industry"></i>
+              <p>
+                Branches
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('branches.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Branches</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('branches.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Branch</p>
                 </a>
               </li>
              

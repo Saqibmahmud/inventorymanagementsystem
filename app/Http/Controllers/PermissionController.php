@@ -10,7 +10,7 @@ use Illuminate\Routing\Controllers\Middleware ;
 
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller //implements HasMiddleware
+class PermissionController extends Controller 
 {
 
 public function index(Request $request) {

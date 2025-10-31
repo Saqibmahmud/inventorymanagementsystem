@@ -6,10 +6,17 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomeRequest;
-use Tymon\JWTAuth\Claims\Custom;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class CustomerController extends Controller
+class CustomerController extends Controller 
 {
+  public function __construct()
+    {
+        $this->middleware('permission:View-Customer')->only(['index', 'show']);
+        $this->middleware('permission:Add-Customer')->only(['create', 'store']);
+        $this->middleware('permission:Edit-Customer')->only(['edit', 'update']);
+        $this->middleware('permission:Delete-Customer')->only(['destroy']);
+    }
     /**
      * Display a listing of the resource.
      */

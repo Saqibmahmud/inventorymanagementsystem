@@ -12,11 +12,17 @@ use App\Models\Supplier ;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\DB;
 
-class PurchasesController extends Controller
+class PurchasesController extends Controller 
 {
-    
+    public function __construct() {
+    $this->middleware('permission:View-Purchase')->only(['index']);
+    $this->middleware('permission:Add-Purchase')->only(['create','store']);
+    $this->middleware('permission:Edit-Purchase')->only(['edit','update']);
+    $this->middleware('permission:Delete-Purchase')->only(['destroy']);
+  }
     public function index(Request $request){
        
         $status_filter=$request->input('status');

@@ -6,9 +6,18 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class SupplierController extends Controller
+class SupplierController extends Controller 
 {
+   public function __construct() {
+    $this->middleware('permission:View-Supplier')->only(['index']);
+    $this->middleware('permission:Add-Supplier')->only(['create','store']);
+    $this->middleware('permission:Edit-Supplier')->only(['edit','update']);
+    $this->middleware('permission:Delete-Supplier')->only(['destroy']);
+  }
+
+
     /**
      * Display a listing of the resource.
      */

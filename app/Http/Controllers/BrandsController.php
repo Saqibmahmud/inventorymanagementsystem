@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBrandsRequest;
 use App\Models\Brands;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class BrandsController extends Controller
+class BrandsController extends Controller 
 {
+    
+public function __construct() {
+    $this->middleware('permission:View-Brand')->only(['index']);
+    $this->middleware('permission:Add-Brand')->only(['create','store']);
+    $this->middleware('permission:Edit-Brand')->only(['edit','update']);
+      $this->middleware('permission:Delete-Brand')->only(['destroy']);
+}
+
     
     public function Index(){
  $allBrands=Brands::paginate(10)->withQueryString();;
