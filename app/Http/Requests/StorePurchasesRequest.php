@@ -35,7 +35,7 @@ class StorePurchasesRequest extends FormRequest
              'purchase_price.*'=>'required|numeric|min:0',
              'total_price'=>'required|array',
              'total_price.*'=>'required|numeric|min:0',
-             'branch_id'=>'required|numeric'
+             
         ];
     }
 }

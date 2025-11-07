@@ -25,8 +25,7 @@ class StoreCustomerRequest extends FormRequest
             'customer_name'=>'required|string',
             'customer_email'=>'email|nullable|unique:customers,customer_email',
             'customer_phone'=>'required|min_digits:11|max_digits:11|unique:customers,customer_phone',
-            'branch_id'=>'required|numeric'
-
+         
         ];
     }
 }

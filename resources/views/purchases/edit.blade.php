@@ -105,7 +105,7 @@
     <div class="col-md-2">
         <label class="form-label fw-semibold">Rec Qty</label>
         <input type="number" name="received_quantity[]" 
-               class="form-control received_quantity" value="{{ $item->received_quantity ?? '' }}" 
+               class="form-control received_quantity" 
                style="height:45px; weight:"  >
     </div>
     @if($errors->has('received_quantity.*'))

@@ -1,7 +1,11 @@
  @extends('layout.app')
 @section('content')
 <div class="container-fluid">
+{{-- @php
 
+$user=Auth::user();
+  dd($user);
+@endphp --}}
   {{-- ===== TOP STAT CARDS (LARGER) ===== --}}
   <div class="row">
    

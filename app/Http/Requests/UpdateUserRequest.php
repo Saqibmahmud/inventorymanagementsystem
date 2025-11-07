@@ -27,8 +27,8 @@ class UpdateUserRequest extends FormRequest
             'password'=>[isset($id)?'nullable' : 'required', 'string', 'min:8'],
             'email'=>'required|email|unique:users,email,'.$id,
            // 'branch_id'=>'required|numeric',
-            'roles'=> 'required|array'
-             //'branch_id'=>'required|numeric'
+            'roles'=> 'required|array',
+             'branch_id'=>'required|numeric'
         ];
     }
 }

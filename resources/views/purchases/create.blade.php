@@ -11,7 +11,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title">Create New Purchase</h3>
+        <h3 class="card-title text-xl">Create New Purchase</h3>
         <a href="{{ route('purchases.index') }}" class="btn btn-secondary">All Purchases</a>
     </div>
     <div class="card-body">

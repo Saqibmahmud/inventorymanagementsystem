@@ -19,9 +19,7 @@ public function __construct() {
 
     
     public function Index(){
- $allBrands=Brands::paginate(10)->withQueryString();;
-
-
+ $allBrands=Brands::paginate(10)->withQueryString();
 return view('brands.index',['data'=>$allBrands]);
         
     } 

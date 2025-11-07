@@ -19,7 +19,7 @@ class Sales_item extends Model
     protected $fillable=['sale_id','product_id','quantity','selling_price','total_price'];
 
 public function sale(){
-    return $this->hasMany(Sales_item::class,'sale_id','id') ;
+    return $this->belongsTo(Sales_item::class,'sale_id','id') ;
 }
 
 

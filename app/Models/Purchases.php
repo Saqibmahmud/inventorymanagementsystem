@@ -6,21 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Purchases extends Model
-{ public const STATUS_PENDING = 'pending';
+{ 
+    public const STATUS_PENDING = 'pending';
     public const STATUS_PARTIALLY_RECEIVED = 'partially_received'; 
     public const STATUS_COMPLETE = 'complete';
     public const STATUS_CANCELLED = 'cancelled';
 
-    protected static function booted()
-{
-    static::addGlobalScope('branch', function ($builder) {
-        if(Auth::check() && Auth::user()->branch_id) {
-            $builder->where('branch_id', Auth::user()->branch_id);
-        }
-    });
-}
 
-    protected $fillable=['supplier_id','purchase_date','total_amount','status','created_by','updated_by'];
+
+    protected $fillable=['supplier_id','purchase_date','total_amount','status','paid_with','created_by','updated_by','branch_id'];
 public function supplier(){
     return $this->belongsTo(Supplier::class)  ;
 }
@@ -35,5 +29,9 @@ public function purchase_items(){
 } 
 public function stock_transactions(){
     return $this->morphMany(Stock_Transactions::class,'reference_id') ;
+}
+
+public function branches(){
+    return $this->belongsTo(Branches::class,'branch_id') ;
 }
 }

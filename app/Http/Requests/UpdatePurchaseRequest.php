@@ -31,7 +31,6 @@ class UpdatePurchaseRequest extends FormRequest
     Purchases::STATUS_PARTIALLY_RECEIVED, 
     Purchases::STATUS_CANCELLED
             ]),
-            // 'updated_by' => 'required|exists:users,id',
             'product_id'=>'required|array',
             'product_id.*'=>'required|exists:products,id',
             'quantity'=>'required|array',
@@ -42,7 +41,7 @@ class UpdatePurchaseRequest extends FormRequest
              'total_price.*'=>'required|numeric|min:0',
              'received_quantity'=>'required|array',
              'received_quantity.*'=>['required','numeric','min:0',
-             'branch_id'=>'required|numeric',
+             
              
              
               function ($attribute, $value, $fail) {

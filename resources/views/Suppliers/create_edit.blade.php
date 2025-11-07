@@ -3,9 +3,9 @@
 <div class="card">
 <div class="card-header">
  @if(isset($data))
-    <h3 class="card-title">Edit Supllier</h3>
+    <h3 class="card-title text-xl">Edit Supllier</h3>
       @else
-    <h3 class="card-title">Add Supplier</h3>
+    <h3 class="card-title text-xl">Add Supplier</h3>
     
 @endif
 </div>

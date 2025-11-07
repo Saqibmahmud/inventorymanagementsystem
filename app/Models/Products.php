@@ -7,16 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class Products extends Model
 {
-    protected static function booted()
-{
-    static::addGlobalScope('branch', function ($builder) {
-        if(Auth::check() && Auth::user()->branch_id) {
-            $builder->where('branch_id', Auth::user()->branch_id);
-        }
-    });
-}
 
-    protected $fillable=['product_name','sku','brands_id','product_categories_id','description','price','reorder_level','supplier_id'];
+
+    protected $fillable=['product_name','sku','brands_id','product_categories_id','description','price','reorder_level','supplier_id','branch_id'];
 public function brands(){
     return $this->belongsTo(Brands::class) ;
 }

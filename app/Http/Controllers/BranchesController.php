@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Branches;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
 class BranchesController extends Controller 
@@ -52,20 +53,43 @@ return redirect()->route('branches.index')->with('success',"Branch Updated Succe
 
 }
 public function destroy($branch){
-    $existing_branch= Branches::where('id',$branch)->first();
-    if(!$existing_branch){
-        session()->flash('error',"branch Not found");
-        return response()->json([
+$existing_branch= Branches::where('id',$branch)->first();
+if(!$existing_branch){
+session()->flash('error',"branch Not found");
+return response()->json([
 'status'=>false,
 'message'=>"branch not found"
         ]);
     }
-    $existing_branch->delete();
-    session()->flash('success','Branch Deleted Succesfully');
+$existing_branch->delete();
+session()->flash('success','Branch Deleted Succesfully');
 return response()->json([
 'status'=>true,
 'message'=>"Branch Deleted Succesfully"
-]);
+]); 
 }
+
+public function select(){
+$branches = Branches::all();
+return view('Branches.set_branch',compact('branches'));
+}
+
+public function set(Request $request){
+$user= Auth::user();
+
+    $request->validate([
+        'branch_id'=>'required|numeric'
+    ]);
+// session(['branch_id'=>$request->branch_id]); 
+
+$user->branch_id = $request->branch_id;
+$user->save();
+return redirect()->route('dashboard')->with('success',"Branch Selected Succcesfully");
+
+} 
+
+
+
+
 
 }

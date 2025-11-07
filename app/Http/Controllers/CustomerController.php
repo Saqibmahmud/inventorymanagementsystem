@@ -100,4 +100,27 @@ class CustomerController extends Controller
    'message'=>"Cutomer Deleted Succesfully"
         ]);
     }
+
+public function search(Request $request ){
+$phoneNumber= $request->input('phoneNumber');
+$customers=Customer::where('customer_phone', 'like', $phoneNumber . '%')->first();  //'customer_phone', 'like', $phoneNumber . '%'
+if(!$customers){
+    return response()->json([
+'status'=>false,
+'message'=>'No customer found! '
+    ]);
+} 
+        
+ return response()->json([
+    'status'=>true ,
+    'data'=>$customers
+ ]);        
+
+}
+
+
+
+
+
+
 }

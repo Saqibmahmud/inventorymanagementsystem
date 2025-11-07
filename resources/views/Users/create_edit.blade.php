@@ -3,9 +3,9 @@
 <div class="card">
 <div class="card-header">
  @if(isset($data))
-    <h3 class="card-title">Edit Users</h3>
+    <h3 class="card-title text-xl">Edit Users</h3>
       @else
-    <h3 class="card-title">Add Users</h3>
+    <h3 class="card-title text-xl">Add Users</h3>
     
 @endif
 </div>
@@ -53,7 +53,7 @@
 
 <label for='branch'>Branch</label>
 <select name='branch_id'>
-  <option value-=''>--Select Branch--</option>
+  <option value=''>--Select Branch--</option>
   @foreach ($branches as $branch )
   <option value="{{$branch->id}}" {{isset($data)&& $data->branch_id == $branch->id ?'selected':''}} > {{$branch->name}}</option>   
 @endforeach

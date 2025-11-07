@@ -9,14 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class Purchases_Items extends Model
 { protected $table='purchases_items';
 
-    protected static function booted()
-{
-    static::addGlobalScope('branch', function ($builder) {
-        if(Auth::check() && Auth::user()->branch_id) {
-            $builder->where('branch_id', Auth::user()->branch_id);
-        }
-    });
-}
+   
 
     protected $fillable=['purchase_id','product_id','quantity','purchase_price','total_price','received_quantity'];
 

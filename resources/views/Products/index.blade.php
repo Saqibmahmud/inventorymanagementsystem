@@ -7,8 +7,8 @@
   </div>
   <x-session-message/>
 <div class="card-body">
-<form method="get" action="{{route('brands.search')}}" class="mb-3">
-  <input type="text" name="query" class="form-control"
+<form method="get" action="{{route('products.search')}}" class="mb-3">
+  <input type="text" name="term" class="form-control"
          placeholder="Search by name or code">
   <button type="submit" class="btn btn-primary btn-sm margin">Search</button>
 </form>
@@ -63,9 +63,8 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() { 
+$(document).ready(function() {
     $('tbody tr').each(function() {
-       
         let $row = $(this);
         let stockQuantity = parseInt($row.find('.stock_quantity').text());
         let reorderLevel = parseInt($row.find('.reorder_level').text());
@@ -77,6 +76,13 @@ $(document).ready(function() {
             $row.css('color', 'inherit');
         }
     });
+
+if($('$success-alert').length){
+setTimeout(() => {
+  $('#success-alert').fadeOut('slow');
+}, 3000);
+}
+
 }); 
   
 </script>

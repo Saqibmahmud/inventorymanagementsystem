@@ -3,9 +3,9 @@
 <div class="card">
   <div class="card-header">
     @if(isset($data))
-    <h3 class="card-title">Edit Permissions</h3>
+    <h3 class="card-title text-xl">Edit Permissions</h3>
     @else
-    <h3 class="card-title">Add Permissions</h3>
+    <h3 class="card-title text-xl">Add Permissions</h3>
     @endif
   </div>
   <div class="card-body">

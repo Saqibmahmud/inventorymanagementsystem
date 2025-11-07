@@ -13,9 +13,9 @@
 <div class="card">
 <div class="card-header">
 @if(isset($data))
-<h3 class="card-title">Edit Products</h3>
+<h3 class="card-title text-xl">Edit Products</h3>
 @else
-<h3 class="card-title">Add Products</h3>
+<h3 class="card-title text-xl">Add Products</h3>
 @endif
 </div>
 <x-session-message/>

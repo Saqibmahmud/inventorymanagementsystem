@@ -129,8 +129,10 @@ font-size:15px;
 
     <div class="container w-1/60 mx-auto mt-5 p-4 border">
         <img src="{{ asset('assets\dist\img\Saqib_al_mahmud.png') }}"> 
-        <p><strong>Supplier:</strong> {{ $purchase->supplier->supplier_name ?? 'N/A' }}</p>
-        <p class="text-sm"><strong>Supplier address:</strong> {{ $purchase->supplier->address ?? 'N/A' }}</p>
+        <p class="text-center text-sm"><strong>Supplier:</strong> {{ $purchase->supplier->supplier_name ?? 'N/A' }}</p>
+        <p class="text-center text-sm"><strong>Supplier address:</strong> {{ $purchase->supplier->address ?? 'N/A' }}</p>
+             <p class='text-center text-sm'><strong>Branch Name</strong> {{$purchase->branches->name}}</p>
+        <p class='text-center text-sm'><strong> Address</strong>  {{$purchase->branches->location}}</p>
 
         <hr>
 
@@ -192,7 +194,8 @@ font-size:15px;
  
         <p class='text-center text-sm'>Saqib Al Mahmud<p>
        <p class='text-center text-sm'> PO Invoice of Sales Managemnet System </p>
-       <p class='text-center text-sm'> u:52 noorzahan road</p>
+       <p class='text-center text-sm'> {{$purchase->branches->name}}</p>
+        <p class='text-center text-sm'> {{$purchase->branches->location}}</p>
     </body>
    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -38,119 +38,27 @@
         <a href="{{route('roles.index')}}" class="nav-link">Roles</a>
       </li>
       @endcan
-      @can('View-User')
+    
+      @role('Super Admin') 
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('users.index')}}" class="nav-link">Users</a>
+        <a href="{{route('branches.select')}}" class="nav-link"> <i class="fas fa-exchange-alt"></i> Branch</a>
       </li>
-      @endcan
-      @can('View-Customer')
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('customers.index')}}" class="nav-link">Customers</a>
-      </li>
-      @endcan
-      @can('View-Supplier')
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('suppliers.index')}}" class="nav-link">Suppliers</a>
-      </li>
-      @endcan
-      @if(Auth::check())
-      <li class="nav-item d-none d-sm-inline-block">
-       <form method="POST" action={{route('logout')}}>@csrf @method('Post')<button class="nav-link">LogOut</button>   </form>
-      </li>
-      @endif
+      @endrole
+    
     </ul>
-
-    <!-- Right navbar links -->
-
-<div class="d-none d-sm-flex align-items-center ms-sm-3">
-    <x-dropdown align="right" width="48">
-        <x-slot name="trigger">
-            {{-- Replaced Tailwind classes with Bootstrap equivalent dropdown toggler classes --}}
-            <button class="d-inline-flex align-items-center px-3 py-2 border border-transparent text-sm lh-sm fw-medium rounded text-secondary bg-white hover:text-dark focus:outline-none transition ease-in-out duration-150"
-                    type="button" 
-                    data-bs-toggle="dropdown" 
-                    aria-expanded="false">
-                
-                <div>{{isset(Auth::user()->name) ?Auth::user()->name:'' }}</div>
-
-                <div class="ms-1">
-                    {{-- SVG icons are kept as-is, but you might consider using Bootstrap Icons or Font Awesome --}}
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-            </button>
-        </x-slot>
-
-        <x-slot name="content">
-            <x-dropdown-link :href="route('profile.edit')" class="dropdown-item">
-                {{ __('Profile') }}
-            </x-dropdown-link>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <x-dropdown-link :href="route('logout')" class="dropdown-item"
-                    onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </x-dropdown-link>
-            </form>
-        </x-slot>
-    </x-dropdown>
-</div>
-
-<div class="me-n2 d-flex align-items-center d-sm-none">
-    {{-- Replaced Tailwind classes with Bootstrap Navbar Toggler and utility classes --}}
-    <button @click="open = ! open" class="navbar-toggler p-2 rounded text-secondary hover:text-dark bg-light focus:outline-none focus:bg-light focus:text-dark transition duration-150 ease-in-out" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#responsive-menu" 
-            aria-controls="responsive-menu" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation">
-        {{-- SVG is generally left alone, but you'd control visibility with Alpine/JS or use Bootstrap icons --}}
-        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-            <path :class="{'d-none': open, 'd-inline-flex': ! open }" class="d-inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            <path :class="{'d-none': ! open, 'd-inline-flex': open }" class="d-none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </button>
-</div>
-
-{{-- Responsive Navigation Menu --}}
-<div :class="{'d-block': open, 'd-none': ! open}" class="d-none d-sm-none collapse" id="responsive-menu">
-    <div class="pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="nav-link">
-            {{ __('Dashboard') }}
-        </x-responsive-nav-link>
-    </div>
-
-    <div class="pt-4 pb-1 border-top border-gray-200">
-        <div class="px-4">
-            <div class="fw-medium text-base text-dark">{{ isset(Auth::user()->name) ?Auth::user()->name:''}}</div>
-            <div class="fw-medium text-sm text-secondary">{{ isset(Auth::user()->email)?Auth::user()->email:'' }}</div>
-        </div>
-
-        <div class="mt-3 space-y-1">
-            <x-responsive-nav-link :href="route('profile.edit')" class="nav-link">
-                {{ __('Profile') }}
-            </x-responsive-nav-link>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <x-responsive-nav-link :href="route('logout')" class="nav-link"
-                    onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </x-responsive-nav-link>
-            </form>
-        </div>
-    </div>
-</div>
 
     {{-- //--------- --}}
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
+ <a class="nav-link" data-widget="navbar" href="#" role="definition">
+       <strong><i class="fas fa-store"></i>Branch : {{isset(Auth::user()->branch_id)? \App\Models\Branches::where('id',Auth::user()->branch_id)->first()->name :''}}
+        </strong></a>
+      </li>
+
+
+
+        
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
@@ -187,7 +95,7 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-info elevation-2">
-">
+
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
       <img src="{{ asset('assets/dist/img/images.png') }}" alt="Inventory Logo" class="brand-image img elevation-3" style="opacity: .8">
@@ -196,230 +104,320 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('assets/dist/img/icon.png') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="" class="d-block">Main Menu</a>
-        </div>
-      </div>
+   <li class="nav-item dropdown">
+  <a href="#" class="nav-link d-flex align-items-center" data-toggle="dropdown" aria-expanded="false">
+    <img src="{{ asset('assets/dist/img/icon.png') }}" class="img-circle elevation-2 mr-2" alt="User Image" style="width: 40px; height: 40px;">
+    <p class="mb-0 text-white">
+      {{Auth::user()->name??'';}} <i class="fas fa-angle-down ml-1"></i>
+    </p>
+  </a>
+  <div class="dropdown-menu dropdown-menu-left">
+    <a href="{{ route('profile.edit') }}" class="dropdown-item" style="font: bold; color:black;"> 
+      <i class="fas fa-user mr-2"></i> Profile
+    </a>
+    <div class="dropdown-divider"></div>
+    <form method="POST" action="{{ route('logout') }}">
+      @csrf
+      <button type="submit" class="dropdown-item text-danger">
+        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+      </button>
+    </form>
+  </div>
+</li>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-          <li class="nav-item menu-open">
-            <a href="{{route('dashboard') }}" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          {{-- Purchases er menu --}}
+    {{-- Dashboard --}}
+    <li class="nav-item menu-open">
+      <a href="{{ route('dashboard') }}" class="nav-link active">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>Dashboard</p>
+      </a>
+    </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-clipboard-check"></i>
-              <p>
-                Purchase
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('purchases.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Purchase</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('purchases.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create Purchase</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-            {{-- Sales er menu --}}
-              <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-check"></i>
-              <p>
-                Sales
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Invoice</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create Invoice</p>
-                </a>
-              </li>
-            
-            </ul>
-          </li>
-          {{-- Products Category er menu --}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fab fa-product-hunt"></i>
-              <p>
-                Products
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('products.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Products</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('products.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Product</p>
-                </a>
-              </li>
-            
-            </ul>
-          </li>
+    {{-- Purchase Menu --}}
+    @canany(['Add-Purchase','View-Purchase'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-clipboard-check"></i>
+        <p>
+          Purchase
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Purchase')
+        <li class="nav-item">
+          <a href="{{ route('purchases.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Purchase</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Purchase')
+        <li class="nav-item">
+          <a href="{{ route('purchases.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Create Purchase</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
 
-          {{-- Brands er menu --}}
-               <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th "></i>
-              <p>
-                Brands
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('brands.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Brands</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('brands.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Brand</p>
-                </a>
-              </li>
-            
-            </ul>
-          </li>
-  {{-- Products Category er menu --}}
-       <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list-ul"></i>
-              <p>
-                Product Categories
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('categories.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('categories.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Category</p>
-                </a>
-              </li>
-            
-            </ul>
-          </li>
-{{--  Customers er menu --}}
- <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Customers
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('customers.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Customers</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('customers.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Customer</p>
-                </a>
-              </li>
-             
-            </ul>
-          </li>
-          {{--  Employee er menu --}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                HRM
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Employees</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('users.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Employee</p>
-                </a>
-              </li>
-             
-            </ul>
-          </li>
-           {{--  Branch er menu --}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-industry"></i>
-              <p>
-                Branches
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('branches.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Branches</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('branches.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Branch</p>
-                </a>
-              </li>
-             
-            </ul>
-          </li>
+    {{-- Sales Menu --}}
+    @canany(['View-Sale','Add-Sale'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-check"></i>
+        <p>
+          Sales
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Sale')
+        <li class="nav-item">
+          <a href="{{route('sales.index')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Invoice</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Sale')
+        <li class="nav-item">
+          <a href="{{route('sales.create')}}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Create Invoice</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
 
-        </ul>
-      </nav>
+    {{-- Products Menu --}}
+    @canany(['View-Product','Add-Product'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fab fa-product-hunt"></i>
+        <p>
+          Products
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Product')
+        <li class="nav-item">
+          <a href="{{ route('products.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Products</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Product')
+        <li class="nav-item">
+          <a href="{{ route('products.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add Product</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
+
+    {{-- Brands Menu --}}
+    @canany(['View-Brand','Add-Brand'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+          Brands
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Brand')
+        <li class="nav-item">
+          <a href="{{ route('brands.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Brands</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Brand')
+        <li class="nav-item">
+          <a href="{{ route('brands.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add Brand</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
+
+    {{-- Categories Menu --}}
+    @canany(['View-Category','Add-Category'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-list-ul"></i>
+        <p>
+          Product Categories
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Category')
+        <li class="nav-item">
+          <a href="{{ route('categories.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Categories</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Category')
+        <li class="nav-item">
+          <a href="{{ route('categories.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add Category</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
+
+    {{-- Customers Menu --}}
+    @canany(['View-Customer','Add-Customer'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-user"></i>
+        <p>
+          Customers
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Customer')
+        <li class="nav-item">
+          <a href="{{ route('customers.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Customers</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Customer')
+        <li class="nav-item">
+          <a href="{{ route('customers.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add Customer</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
+       {{-- Suppliers Menu --}}
+    @canany(['View-Supplier','Add-Supplier'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-truck"></i>
+        <p>
+          Suppliers
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Supplier')
+        <li class="nav-item">
+          <a href="{{ route('suppliers.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Suppliers</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Supplier')
+        <li class="nav-item">
+          <a href="{{ route('suppliers.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add Supplier</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
+
+    {{-- HRM Menu --}}
+    @canany(['View-User','Add-User'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+          HRM
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-User')
+        <li class="nav-item">
+          <a href="{{ route('users.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Employees</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-User')
+        <li class="nav-item">
+          <a href="{{ route('users.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add Employee</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
+
+    {{-- Branches Menu --}}
+    @canany(['View-Branch','Add-Branch'])
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-industry"></i>
+        <p>
+          Branches
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        @can('View-Branch')
+        <li class="nav-item">
+          <a href="{{ route('branches.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>All Branches</p>
+          </a>
+        </li>
+        @endcan
+        @can('Add-Branch')
+        <li class="nav-item">
+          <a href="{{ route('branches.create') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Add Branch</p>
+          </a>
+        </li>
+        @endcan
+      </ul>
+    </li>
+    @endcanany
+
+  </ul>
+</nav>
+
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

@@ -14,17 +14,9 @@ class Stock_Transactions extends Model
     public const TRANSACTION_TYPE_SALE='sale';
     public const TRANSACTION_TYPE_ADJUSTMENT ='adjustment';
 
-protected static function booted()
-{
-    static::addGlobalScope('branch', function ($builder) {
-        if(Auth::check() && Auth::user()->branch_id) {
-            $builder->where('branch_id', Auth::user()->branch_id);
-        }
-    });
-}
 
 
-    protected $fillable=['product_id','transaction_type','quantity','transaction_date','reference_id','reference_type'];
+    protected $fillable=['product_id','transaction_type','quantity','transaction_date','reference_id','reference_type','branch_id'];
 
 public function products(){
     return $this->belongsTo(Products::class,'product_id','id') ;

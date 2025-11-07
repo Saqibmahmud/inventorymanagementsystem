@@ -4,9 +4,9 @@
 <div class="card-header">
     
     @if(isset($data))
-    <h3 class="card-title"> Edit Branch</h3>
+    <h3 class="card-title text-xl "> Edit Branch</h3>
     @else
-     <h3 class="card-title"> Add New Branch</h3>
+     <h3 class="card-title text-xl"> Add New Branch</h3>
 @endif
     </div>
 <div class="card-body">
