@@ -6,6 +6,8 @@ use App\Models\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreSaleRequest;
+use App\Models\Products;
+use App\Models\Sales_item;
 use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
@@ -79,6 +81,28 @@ try{
     $quantities=$request->input('quantity');
     $selling_prices=$request->input('selling_price');
     $total_prices=$request->input('total_price');
+
+    foreach($product_ids as $key=>$product_id){
+        Sales_item::create([
+'sale_id'=>$sale->id ,
+'product_id'=>$product_id,
+'quantity'=>$quantities[$key],
+'selling_price'=>$selling_prices[$key],
+'total_price'=>$total_prices[$key]
+        ]);
+    
+   if($sale->status == Sales::SALES_COMPLETE_STATUS){
+    $product= Products::where('branch_id',$user->branch_id)->where('id',$product_id)->first();
+    $product->stock_quantity -= (float)$quantities[$key]?? 0;
+    $product->save();
+   } 
+    
+    
+    
+    
+    
+    
+    }
 
 }
 catch(\Exception $err){
